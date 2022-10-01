@@ -1,0 +1,6 @@
+selenium_env/
+.pytest_cache/
+venv/
+__pycache__/
+.idea/
+.DS_Store
