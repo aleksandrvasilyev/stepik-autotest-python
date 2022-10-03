@@ -9,7 +9,8 @@ def calc(x):
 
 try:
     link = "http://suninjuly.github.io/get_attribute.html"
-    browser = webdriver.Chrome('/usr/local/bin/chromedriver')
+    # browser = webdriver.Chrome('/usr/local/bin/chromedriver')
+    browser = webdriver.Chrome()
     browser.get(link)
 
     x_element = browser.find_element_by_id('treasure')
@@ -30,5 +31,5 @@ try:
 
 
 finally:
-    time.sleep(5)
+    time.sleep(3)
     browser.quit()
