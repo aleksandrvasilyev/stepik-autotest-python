@@ -2,8 +2,14 @@
 ____
 ## Оглавление
 
-1. [Методы поиска элементов](#Методы-поиска-элементов)
-2. [Поиск элемента по XPATH](#Поиск-элемента-по-XPATH)
+- Поиск элемента
+  - [Методы поиска элементов](#Методы-поиска-элементов)
+  - [Поиск элемента по тексту в ссылке](#Поиск-элемента-по-тексту-в-ссылке)
+  - [Поиск элемента по XPATH](#Поиск-элемента-по-XPATH)
+- Веб элементы
+    - [Checkbox, Radiobutton](#Checkbox,-Radiobutton)
+    - Уровень списка 2. Пункт 2.
+- Уровень списка 1. Пункт 3.
 
 ## Методы поиска элементов
 
@@ -33,3 +39,35 @@ button = browser.find_element(By.XPATH, "//button[text()='Submit']")
 button = browser.find_element(By.XPATH, "//button[contains(text(), 'Submit')]")
 ```
 ____
+## Checkbox, Radiobutton
+По label
+```html
+<input type="checkbox" id="coding" name="interest" value="coding" checked />
+<label for="coding">Coding</label>
+```
+```html
+<input type="radio" id="coding" name="language">
+<label for="coding">Java</label>
+```
+
+```python
+input = browser.find_element(By.CSS_SELECTOR, "[for='coding']")
+input.click()
+```
+
+По value
+```html
+<input type="checkbox" id="python" name="python" value="python" checked />
+```
+
+```html
+<input type="radio" name="language" value="python">
+```
+
+```python
+input = browser.find_element(By.CSS_SELECTOR, "[value='python']")
+input.click()
+```
+
+
+
