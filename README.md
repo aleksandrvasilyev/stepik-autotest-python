@@ -1,1 +1,1 @@
-[notes.md](Шпаргалка)
+[/notes.md](Шпаргалка Selenium)
