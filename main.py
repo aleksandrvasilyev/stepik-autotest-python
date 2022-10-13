@@ -1,35 +1,14 @@
 from selenium import webdriver
-import time
-import math
+from selenium.webdriver.common.by import By
 
+browser = webdriver.Chrome()
+# говорим WebDriver ждать все элементы в течение 5 секунд
+browser.implicitly_wait(5)
 
-def calc(x):
-    return str(math.log(abs(12 * math.sin(int(x)))))
+browser.get("http://suninjuly.github.io/wait2.html")
 
+button = browser.find_element(By.ID, "verify")
+button.click()
+message = browser.find_element(By.ID, "verify_message")
 
-try:
-    link = "http://suninjuly.github.io/get_attribute.html"
-    # browser = webdriver.Chrome('/usr/local/bin/chromedriver')
-    browser = webdriver.Chrome()
-    browser.get(link)
-
-    x_element = browser.find_element_by_id('treasure')
-    x = x_element.get_attribute("valuex")
-    y = calc(x)
-
-    input1 = browser.find_element_by_id('answer')
-    input1.send_keys(y)
-
-    input2 = browser.find_element_by_id('robotCheckbox')
-    input2.click()
-
-    input3 = browser.find_element_by_id('robotsRule')
-    input3.click()
-
-    input4 = browser.find_element_by_tag_name('button')
-    input4.click()
-
-
-finally:
-    time.sleep(3)
-    browser.quit()
+assert "successful" in message.text

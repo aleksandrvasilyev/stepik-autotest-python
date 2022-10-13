@@ -9,6 +9,7 @@ ____
 - Веб элементы
     - [Checkbox, Radiobutton](#Checkbox,-Radiobutton)
     - [Список (select, option)](#Список-(select,-option))
+    - [Вызвать javascript код](#Вызвать-javascript-код)
 - Уровень списка 1. Пункт 3.
 
 ## Методы поиска элементов
@@ -51,8 +52,7 @@ ____
 ```
 
 ```python
-input = browser.find_element(By.CSS_SELECTOR, "[for='coding']")
-input.click()
+input = browser.find_element(By.CSS_SELECTOR, "[for='coding']").click()
 ```
 
 По value
@@ -65,8 +65,7 @@ input.click()
 ```
 
 ```python
-input = browser.find_element(By.CSS_SELECTOR, "[value='python']")
-input.click()
+input = browser.find_element(By.CSS_SELECTOR, "[value='python']").click()
 ```
 
 get_attribute
@@ -80,6 +79,102 @@ ____
 ## Список (select, option)
 
 
+Выбрать option в списке
+```python
+browser.find_element(By.TAG_NAME, "select").click()
 
+browser.find_element(By.CSS_SELECTOR, "option:nth-child(2)").click()
+# browser.find_element(By.CSS_SELECTOR, "[value='1']").click()
+```
+или
+```python
+from selenium.webdriver.support.ui import Select
+select = Select(browser.find_element(By.TAG_NAME, "select"))
+select.select_by_value("1")
+# select.select_by_visible_text("text")
+# select.select_by_index(index)
+```
 
+____
+## Вызвать javascript код
+
+```python
+from selenium import webdriver
+browser = webdriver.Chrome()
+browser.execute_script("alert('Robots at work');")
+browser.execute_script("alert(\"Robots at work\");")
+browser.execute_script("document.title='Script executing';alert('Robots at work');")
+```
+
+## upload file
+```python
+import os 
+
+current_dir = os.path.abspath(os.path.dirname(__file__))    # получаем путь к директории текущего исполняемого файла 
+file_path = os.path.join(current_dir, 'file.txt')           # добавляем к этому пути имя файла 
+element.send_keys(file_path)
+```
+
+## alert
+```python
+alert = browser.switch_to.alert  # переключаемся на окно
+alert.accept()  # нажимаем принять
+```
+
+```python
+alert = browser.switch_to.alert  # переключаемся на окно
+alert_text = alert.text  # получаем текст из окна
+```
+окно с выбором:
+```python
+confirm = browser.switch_to.alert
+confirm.accept()  # принять
+confirm.dismiss()  # отказаться
+```
+окно с полем ввода текста:
+```python
+prompt = browser.switch_to.alert
+prompt.send_keys("My answer")
+prompt.accept()
+```
+## Переход на другую вкладку
+
+```python
+current_window = browser.current_window_handle  # текущая вкладка
+first_window = browser.window_handles[0]
+second_window = browser.window_handles[1]
+
+browser.switch_to.window(window_name)
+```
+## Implicit Waits
+Неявное ожидание. Проверяет наличие элемента каждые 500 мс
+```python
+# говорим WebDriver ждать все элементы в течение 5 секунд
+browser.implicitly_wait(5)
+```
+## Explicit Waits
+```python
+button = WebDriverWait(browser, 5).until(
+        EC.element_to_be_clickable((By.ID, "verify"))
+    )
+```
+В модуле expected_conditions есть много других правил, которые позволяют реализовать необходимые ожидания:
+
+- title_is
+- title_contains
+- presence_of_element_located
+- visibility_of_element_located
+- visibility_of
+- presence_of_all_elements_located
+- text_to_be_present_in_element
+- text_to_be_present_in_element_value
+- frame_to_be_available_and_switch_to_it
+- invisibility_of_element_located
+- element_to_be_clickable
+- staleness_of
+- element_to_be_selected
+- element_located_to_be_selected
+- element_selection_state_to_be
+- element_located_selection_state_to_be
+- alert_is_present
 
