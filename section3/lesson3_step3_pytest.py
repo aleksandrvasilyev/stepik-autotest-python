@@ -1,5 +1,5 @@
 from selenium import webdriver
-import time
+# import time
 import unittest
 
 
@@ -7,7 +7,7 @@ class TestUI(unittest.TestCase):
 
     def test_first(self):
         link = 'http://suninjuly.github.io/registration1.html'
-        browser = webdriver.Chrome('/usr/local/bin/chromedriver')
+        browser = webdriver.Chrome()
         browser.get(link)
 
         input1 = browser.find_element_by_css_selector('.first_block .form-control.first')
@@ -22,7 +22,7 @@ class TestUI(unittest.TestCase):
         input5.send_keys('Kharkov, pr. Peremohy 89')
         button = browser.find_element_by_css_selector("button.btn")
         button.click()
-        time.sleep(1)
+        # time.sleep(1)
         success_text = browser.find_element_by_tag_name("h1")
         self.assertEqual(success_text.text, 'Congratulations! You have successfully registered!', 'Error!')
         browser.quit()
@@ -32,7 +32,7 @@ class TestUI(unittest.TestCase):
         browser = webdriver.Chrome('/usr/local/bin/chromedriver')
         browser.get(link)
 
-        input1 = browser.find_element_by_css_selector('.first_block >.first_class > .first')
+        input1 = browser.find_element_by_css_selector('.first_block > .first_class > .first')
         input2 = browser.find_element_by_css_selector('.first_block > .second_class > .second')
         input3 = browser.find_element_by_css_selector('.first_block > .third_class > .third')
         input1.send_keys('Name')
