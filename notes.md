@@ -178,3 +178,12 @@ button = WebDriverWait(browser, 5).until(
 - element_located_selection_state_to_be
 - alert_is_present
 
+## assert
+
+```python
+assert True  #  True
+assert False  # AssertionError
+assert abs(-42) == -42  # AssertionError
+assert abs(-42) == -42, 'error description'  # error description
+assert abs(-42) == 42, 'error description'  # True
+```
